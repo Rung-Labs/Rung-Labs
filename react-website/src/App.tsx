@@ -9,8 +9,7 @@ import { useState } from "react";
 
 function AppContent() {
   const [hovering, setHovering] = useState(false);
-  const location = useLocation();
-  const isHome = location.pathname === "/";
+  useLocation();
 
   return (
     <div className="min-h-screen bg-background text-foreground relative">
