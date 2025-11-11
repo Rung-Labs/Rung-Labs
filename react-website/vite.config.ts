@@ -10,6 +10,14 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  // Reduce console noise in development
+  server: {
+    hmr: {
+      overlay: true, // Show errors in browser overlay
+    },
+  },
+  // Only show warnings and errors in terminal
+  logLevel: 'warn',
   build: {
     // Optimize for production
     minify: 'esbuild', // Use esbuild for faster builds

@@ -51,7 +51,7 @@ export const MobileMenu = ({ className }: MobileMenuProps) => {
               e.preventDefault();
             }
           }}
-          className="fixed top-20 left-0 w-full z-40 px-6 md:px-12"
+          className="fixed top-24 left-0 w-full z-40 px-6 md:px-12"
         >
           <Dialog.Title className="sr-only">Menu</Dialog.Title>
 
@@ -61,7 +61,7 @@ export const MobileMenu = ({ className }: MobileMenuProps) => {
                 key={item.name}
                 to={item.href}
                 onClick={handleLinkClick}
-                className="text-xl font-mono uppercase text-foreground/60 transition-colors ease-out duration-150 hover:text-foreground/100 py-2"
+                className="text-2xl font-mono uppercase font-medium text-foreground/60 transition-colors ease-out duration-150 hover:text-foreground/100 py-2"
               >
                 {item.name}
               </Link>
@@ -71,7 +71,7 @@ export const MobileMenu = ({ className }: MobileMenuProps) => {
               <Link
                 to="/contact"
                 onClick={handleLinkClick}
-                className="inline-block text-xl font-mono uppercase text-primary transition-colors ease-out duration-150 hover:text-primary/80 py-2"
+                className="inline-block text-2xl font-mono uppercase font-medium text-primary transition-colors ease-out duration-150 hover:text-primary/80 py-2"
               >
                 Get Started
               </Link>

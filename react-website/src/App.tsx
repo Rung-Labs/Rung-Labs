@@ -12,15 +12,15 @@ function AppContent() {
   useLocation();
 
   return (
-    <div className="min-h-screen bg-background text-foreground relative">
+    <div className="h-screen bg-background text-foreground relative overflow-hidden max-md:overflow-y-auto max-md:min-h-screen max-md:h-auto">
       {/* Persistent Background Animation */}
       <GL hovering={hovering} />
       
       {/* Page Content - relative z-index keeps it above background */}
-      <div className="relative z-10">
+      <div className="relative z-10 h-full">
         <Header />
         {/* Spacer for fixed header */}
-        <div className="h-20" />
+        <div className="h-24" />
         <Routes>
           <Route 
             path="/" 
@@ -37,7 +37,12 @@ function AppContent() {
 
 function App() {
   return (
-    <Router>
+    <Router
+      future={{
+        v7_startTransition: true,
+        v7_relativeSplatPath: true,
+      }}
+    >
       <AppContent />
     </Router>
   );

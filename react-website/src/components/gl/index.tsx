@@ -6,22 +6,37 @@ export const GL = ({ hovering }: { hovering: boolean }) => {
   // Device detection for performance optimization
   const [particleSize, setParticleSize] = useState(256);
   const [pixelRatio, setPixelRatio] = useState(1);
+  const [frameloop, setFrameloop] = useState<"always" | "never">("always");
 
   useEffect(() => {
     // Detect device performance level
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
     const isLowEnd = navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4;
+    const isTablet = window.innerWidth > 768 && window.innerWidth <= 1024;
     
     if (isMobile) {
-      setParticleSize(128); // 16,384 particles (mobile)
+      setParticleSize(96); // 9,216 particles (mobile) - further reduced
+      setPixelRatio(1); // Force 1x on mobile for performance
+    } else if (isTablet) {
+      setParticleSize(128); // 16,384 particles (tablet)
       setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     } else if (isLowEnd) {
-      setParticleSize(192); // 36,864 particles (low-end desktop)
+      setParticleSize(160); // 25,600 particles (low-end desktop)
       setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     } else {
-      setParticleSize(256); // 65,536 particles (desktop)
-      setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      setParticleSize(192); // 36,864 particles (desktop) - reduced from 256
+      setPixelRatio(Math.min(window.devicePixelRatio, 1.5)); // Cap at 1.5x
     }
+
+    // Pause animation when tab is not visible
+    const handleVisibilityChange = () => {
+      setFrameloop(document.hidden ? "never" : "always");
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
   }, []);
 
   // Optimized values for production
@@ -40,11 +55,13 @@ export const GL = ({ hovering }: { hovering: boolean }) => {
       <Canvas
         dpr={pixelRatio}
         performance={{ min: 0.5 }}
+        frameloop={frameloop}
         gl={{
           powerPreference: "high-performance",
           antialias: false,
           stencil: false,
           depth: false,
+          alpha: false,
         }}
         camera={{
           position: [

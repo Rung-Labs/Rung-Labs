@@ -42,8 +42,8 @@ const solutions = [
 
 export function Solutions() {
   return (
-    <section className="relative min-h-[calc(100svh-5rem)] py-12 md:py-16 flex items-center">
-      <div className="container space-y-10">
+    <section className="relative h-[calc(100svh-6rem)] flex items-center overflow-hidden max-md:overflow-y-auto">
+      <div className="container space-y-8 py-8 md:py-0">
         <div className="text-center space-y-6">
           <h2 className="text-4xl md:text-5xl font-sentient">
             Purpose-built for non-technical industries
