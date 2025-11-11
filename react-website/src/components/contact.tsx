@@ -28,9 +28,7 @@ export function Contact() {
     );
     formData.append("from_name", "Rung Labs Website");
 
-    // Add multiple recipients (your and co-founder's emails)
-    // Replace with your actual email addresses
-    formData.append("email", "nmcgourthy@runglabs.com");
+    formData.append("email", "nmcgourthy@runglabs.com, zreed@runglabs.com");
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
