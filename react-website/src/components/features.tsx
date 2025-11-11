@@ -32,8 +32,8 @@ export function Features() {
   ];
 
   return (
-    <section className="relative min-h-svh py-12 md:py-16 flex items-center">
-      <div className="container pt-24 md:pt-28">
+    <section className="relative min-h-[calc(100svh-5rem)] py-12 md:py-16 flex items-center">
+      <div className="container">
         <div className="space-y-12">
           {/* Header */}
           <div className="space-y-6 text-center">

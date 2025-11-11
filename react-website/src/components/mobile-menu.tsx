@@ -26,7 +26,7 @@ export const MobileMenu = ({ className }: MobileMenuProps) => {
       <Dialog.Trigger asChild>
         <button
           className={cn(
-            "group lg:hidden p-2 text-foreground transition-colors",
+            "group lg:hidden -mr-2 p-2 text-foreground transition-colors hover:bg-foreground/5 rounded-lg",
             className
           )}
           aria-label="Open menu"
@@ -51,11 +51,11 @@ export const MobileMenu = ({ className }: MobileMenuProps) => {
               e.preventDefault();
             }
           }}
-          className="fixed top-0 left-0 w-full z-40 py-28 md:py-40"
+          className="fixed top-20 left-0 w-full z-40 px-6 md:px-12"
         >
           <Dialog.Title className="sr-only">Menu</Dialog.Title>
 
-          <nav className="flex flex-col space-y-6 container mx-auto">
+          <nav className="flex flex-col space-y-6">
             {menuItems.map((item) => (
               <Link
                 key={item.name}
@@ -82,4 +82,5 @@ export const MobileMenu = ({ className }: MobileMenuProps) => {
     </Dialog.Root>
   );
 };
+
 

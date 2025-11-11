@@ -19,6 +19,8 @@ function AppContent() {
       {/* Page Content - relative z-index keeps it above background */}
       <div className="relative z-10">
         <Header />
+        {/* Spacer for fixed header */}
+        <div className="h-20" />
         <Routes>
           <Route 
             path="/" 

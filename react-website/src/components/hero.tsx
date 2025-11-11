@@ -8,8 +8,8 @@ export function Hero({
   setHovering: (hovering: boolean) => void;
 }) {
   return (
-    <div className="flex flex-col h-svh justify-between">
-      <div className="pb-16 mt-[40vh] text-center relative z-10">
+    <div className="flex flex-col min-h-[calc(100svh-5rem)] justify-center">
+      <div className="text-center relative z-10">
         <Pill className="mb-6">AI CALL HANDLING</Pill>
         <h1 className="text-5xl sm:text-6xl md:text-7xl font-sentient">
           Never miss another call

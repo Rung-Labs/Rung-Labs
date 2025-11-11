@@ -42,8 +42,8 @@ const solutions = [
 
 export function Solutions() {
   return (
-    <section className="relative min-h-svh py-12 md:py-16 flex items-center">
-      <div className="container space-y-10 pt-24 md:pt-28">
+    <section className="relative min-h-[calc(100svh-5rem)] py-12 md:py-16 flex items-center">
+      <div className="container space-y-10">
         <div className="text-center space-y-6">
           <h2 className="text-4xl md:text-5xl font-sentient">
             Purpose-built for non-technical industries

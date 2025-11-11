@@ -115,14 +115,20 @@ export function Particles({
     // We want to start from center (0) and expand outward (higher values)
     const revealFactor = easedProgress * 4.0; // Doubled the radius for larger coverage
 
+    // Stop updating reveal state after animation completes
     if (revealProgress >= 1.0 && isRevealing) {
       setIsRevealing(false);
     }
 
     dofPointsMaterial.uniforms.uTime.value = currentTime;
 
-    dofPointsMaterial.uniforms.uFocus.value = focus;
-    dofPointsMaterial.uniforms.uBlur.value = aperture;
+    // Only update focus/blur if needed
+    if (dofPointsMaterial.uniforms.uFocus.value !== focus) {
+      dofPointsMaterial.uniforms.uFocus.value = focus;
+    }
+    if (dofPointsMaterial.uniforms.uBlur.value !== aperture) {
+      dofPointsMaterial.uniforms.uBlur.value = aperture;
+    }
 
     easing.damp(
       dofPointsMaterial.uniforms.uTransition,
@@ -133,15 +139,30 @@ export function Particles({
     );
 
     simulationMaterial.uniforms.uTime.value = currentTime;
-    simulationMaterial.uniforms.uNoiseScale.value = noiseScale;
-    simulationMaterial.uniforms.uNoiseIntensity.value = noiseIntensity;
+    
+    // Only update if values changed
+    if (simulationMaterial.uniforms.uNoiseScale.value !== noiseScale) {
+      simulationMaterial.uniforms.uNoiseScale.value = noiseScale;
+    }
+    if (simulationMaterial.uniforms.uNoiseIntensity.value !== noiseIntensity) {
+      simulationMaterial.uniforms.uNoiseIntensity.value = noiseIntensity;
+    }
+    
     simulationMaterial.uniforms.uTimeScale.value = timeScale * speed;
 
-    // Update point material uniforms
-    dofPointsMaterial.uniforms.uPointSize.value = pointSize;
-    dofPointsMaterial.uniforms.uOpacity.value = opacity;
-    dofPointsMaterial.uniforms.uRevealFactor.value = revealFactor;
-    dofPointsMaterial.uniforms.uRevealProgress.value = easedProgress;
+    // Update point material uniforms only if needed
+    if (dofPointsMaterial.uniforms.uPointSize.value !== pointSize) {
+      dofPointsMaterial.uniforms.uPointSize.value = pointSize;
+    }
+    if (dofPointsMaterial.uniforms.uOpacity.value !== opacity) {
+      dofPointsMaterial.uniforms.uOpacity.value = opacity;
+    }
+    
+    // Update reveal only during animation
+    if (isRevealing || revealProgress < 1.0) {
+      dofPointsMaterial.uniforms.uRevealFactor.value = revealFactor;
+      dofPointsMaterial.uniforms.uRevealProgress.value = easedProgress;
+    }
   });
 
   return (
